@@ -1,0 +1,42 @@
+* {
+    outline: none;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    overflow: hidden;
+}
+canvas {
+    position: absolute;
+}
+
+#background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1; /* Ensure the canvas is behind other elements */
+}
+
+#reset-btn {
+    margin-left: 8;
+    background: #0066A2;
+	color: white;
+	border-style: outset;
+	border-color: black;
+	height: 50px;
+	width: 100px;
+	font: bold15px arial,sans-serif;
+	text-shadow: none;
+}
+
+#bg-btn {
+    margin-left: 8;
+    background: #0066A2;
+	color: white;
+	border-style: outset;
+	border-color: black;
+	height: 50px;
+	width: 100px;
+	font: bold15px arial,sans-serif;
+	text-shadow: none;
+}
