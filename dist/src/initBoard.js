@@ -1,5 +1,5 @@
-import * as THREE from "../node_modules/three/build/three.module.js";
-import {GLTFLoader} from "../node_modules/three/examples/jsm/loaders/GLTFLoader.js"
+import * as THREE from 'https://cdn.skypack.dev/three@0.129.0/build/three.module.js';
+import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js';
 
 import { scene, camera, renderer, controls } from './initScene.js';
 

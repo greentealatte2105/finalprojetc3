@@ -1,4 +1,4 @@
-import * as THREE from "../node_modules/three/build/three.module.js";
+import * as THREE from "https://unpkg.com/three@0.127.0/build/three.module.js";
 
 import { initScene, animate, onWindowResize } from './initScene.js';
 import { initBoard, createHorses, setUpModel, board } from './initBoard.js';

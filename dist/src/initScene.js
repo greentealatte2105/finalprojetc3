@@ -1,6 +1,6 @@
-import * as THREE from "../node_modules/three/build/three.module.js";
-import { OrbitControls } from '../node_modules/three/examples/jsm/controls/OrbitControls.js';
-import { RGBELoader } from "../node_modules/three/examples/jsm/loaders/RGBELoader.js";
+import * as THREE from "https://unpkg.com/three@0.127.0/build/three.module.js";
+import { OrbitControls } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/controls/OrbitControls.js';
+import { RGBELoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/RGBELoader.js";
 export let scene, camera, renderer, controls;
 
 
