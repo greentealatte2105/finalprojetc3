@@ -36,18 +36,52 @@ export function onClickPiece(event) {
   if(selectedMesh) {
     raycaster.setFromCamera(mouse, camera);
     intersects = raycaster.intersectObjects(board.children);
-    
+    const timelineT = gsap.timeline();
+
     if ( intersects.length > 0 && intersects[0].object.userData.squareNumber ) {
       const targetSquare = intersects[0].object.userData.squareNumber;
       const selectedObject = scene.children.find((child) => child.userData.currentSquare === selectedMesh);
+      console.log(selectedObject);
       if (!selectedObject || !targetSquare) return;
 
       const targetPosition = positionForSquare(targetSquare);
-      selectedObject.position.set(targetPosition.x, selectedObject.position.y, targetPosition.z);
-      selectedObject.currentSquare = targetSquare;
-
+      if( checkValidMove(targetPosition.x, targetPosition.z, selectedObject) === true ){
+        timelineT.to(selectedObject.position, {
+          x: targetPosition.x,
+          z: targetPosition.z,
+          duration: 0.5,
+        });
+        selectedObject.currentSquare = targetSquare;
+      }
+      
       selectedMesh = null;
     }
+  }
+}
+
+function checkValidMove(posX, posZ, chess){
+
+
+  switch (chess.userData.name) {
+    case "Black-Pawn":
+      if(chess.position.z  == 7) {
+        if ((chess.position.z == posZ + 1 || chess.position.z == posZ + 2) && chess.position.x == posX) return true;
+      } else {
+        if ( (chess.position.z == posZ + 1)  && chess.position.x == posX ) 
+          return true;
+      }   
+      break;
+    
+    case "White-Pawn":
+      if((chess.position.z) == 2) {
+          if (( chess.position.z == posZ - 1 || chess.position.z == posZ - 2 ) && chess.position.x == posX) return true;
+      } else {
+        if ( (chess.position.z == posZ - 1) && chess.position.x == posX)
+            return true;
+        }   
+      break;   
+    default:
+      break;
   }
 }
 
