@@ -80,6 +80,64 @@ function checkValidMove(posX, posZ, chess){
             return true;
         }   
       break;   
+    case "Black-Rock":
+    case "White-Rock":
+      if (chess.position.x == posX || chess.position.z == posZ) {
+        console.log("asdas")
+        return true;
+      }
+      break;
+
+    case "Black-Bishop":
+    case "White-Bishop":
+      var dx = posX - chess.position.x;
+      var dz = posZ - chess.position.z;
+      if (Math.abs(dx) === Math.abs(dz)) {
+          var stepX = dx > 0 ? 1 : -1;
+          var stepZ = dz > 0 ? 1 : -1;
+                    
+          var currentX = chess.position.x + stepX;
+          var currentZ = chess.position.z + stepZ;
+          while (currentX !== posX && currentZ !== posZ) {
+              currentX += stepX;
+              currentZ += stepZ;
+          }
+                    
+          return true;
+      }
+      break;
+
+    case "Black-Knight":
+    case "White-Knight":
+      var dx = posX - chess.position.x;
+      var dz = posZ - chess.position.z;
+      var absDx = Math.abs(dx);
+      var absDz = Math.abs(dz);
+      if ((absDx === 1 && absDz === 2) || (absDx === 2 && absDz === 1)) {
+        return true;
+      }
+    break;
+      
+    case "Black-Queen":
+    case "White-Queen":
+      var dx = posX - chess.position.x;
+      var dz = posZ - chess.position.z;
+      var absDx = Math.abs(dx);
+      var absDz = Math.abs(dz);
+      if (absDx === absDz || absDx === 0 || absDz === 0) 
+        return true;
+      break;
+    
+    case "Black-King":
+    case "White-King":
+      var dx = posX - chess.position.x;
+      var dz = posZ - chess.position.z;
+      var absDx = Math.abs(dx);
+      var absDz = Math.abs(dz);
+      if ((absDx === 1 && absDz === 0) || (absDx === 0 && absDz === 1)
+      || (absDx === 1 && absDz === 1))
+        return true
+
     default:
       break;
   }
