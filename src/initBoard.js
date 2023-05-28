@@ -137,6 +137,6 @@ export function createHorse(boardPos, name, meshName) {
 
     mesh.quaternion.set(quat.x, quat.y, quat.z, quat.z);
     mesh.userData.currentSquare = boardPos.square;  
-
+    mesh.current = boardPos.square;
     scene.add(mesh);        
 }
