@@ -57,10 +57,7 @@ export function onClickPiece(event) {
       }
       
       const samePosMesh = scene.children.filter((child) => child.current === targetSquare);
-      // console.log("selected mesh", selectedMesh);
-      console.log("Same pos mesh", samePosMesh);
       let deadMesh = samePosMesh.find((mesh) => mesh.userData.currentSquare !== selectedMesh);
-      console.log("dead mesh", deadMesh);
       if(deadMesh !== undefined){
         if(deadMesh.name.startsWith("White")){
           timelineT.to(deadMesh.position, {
