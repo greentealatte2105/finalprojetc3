@@ -43,8 +43,9 @@ export function initScene() {
   renderer.outputEncoding = THREE.sRGBEncoding;
   document.body.appendChild(renderer.domElement);
 
-  camera.position.y = 1;
-  camera.position.z = 3;
+  camera.position.y = 6;
+  camera.position.x = -3;
+  camera.position.z = 4.3;
 
   controls = new OrbitControls(camera, renderer.domElement);
   controls.target.set(4.5, 0, 4.5);
