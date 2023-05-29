@@ -7,6 +7,8 @@ import { board } from "./initBoard.js";
 var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2();
 var selectedMesh = null;
+let i = 0;
+let j = 9;
 
 // var raycaster = new THREE.Raycaster();
 
@@ -28,7 +30,6 @@ export function onClickPiece(event) {
   // var selectedMesh = null;
   raycaster.setFromCamera(mouse, camera);
   let intersects = raycaster.intersectObjects(scene.children);
-  // console.log(intersects[0].object.userData);
   if(intersects.length > 0 && selectedMesh == null) {
     selectedMesh = intersects[0].object.userData.currentSquare;
     return;
@@ -41,19 +42,45 @@ export function onClickPiece(event) {
     if ( intersects.length > 0 && intersects[0].object.userData.squareNumber ) {
       const targetSquare = intersects[0].object.userData.squareNumber;
       const selectedObject = scene.children.find((child) => child.userData.currentSquare === selectedMesh);
+<<<<<<< HEAD
       // console.log(selectedObject);
+=======
+      
+>>>>>>> 00ad26b05b0e5878216e08900fcb5e57c7011f80
       if (!selectedObject || !targetSquare) return;
-
+      
       const targetPosition = positionForSquare(targetSquare);
+
       if( checkValidMove(targetPosition.x, targetPosition.z, selectedObject) === true ){
         timelineT.to(selectedObject.position, {
           x: targetPosition.x,
           z: targetPosition.z,
           duration: 0.5,
         });
-        selectedObject.currentSquare = targetSquare;
+        selectedObject.current = targetSquare;
       }
       
+      const samePosMesh = scene.children.filter((child) => child.current === targetSquare);
+      let deadMesh = samePosMesh.find((mesh) => mesh.userData.currentSquare !== selectedMesh);
+      if(deadMesh !== undefined){
+        if(deadMesh.name.startsWith("White")){
+          timelineT.to(deadMesh.position, {
+            x: 0,
+            z: i
+          });
+          i++;
+          deadMesh.current = Math.floor(Math.random() * 1000) - 1000;
+        }
+        else{
+          timelineT.to(deadMesh.position, {
+            x: 9,
+            z: j
+          });
+          j--;
+          deadMesh.current = Math.floor(Math.random() * 1000) - 1000;
+        }
+      }
+      deadMesh = null;
       selectedMesh = null;
     }
   }
@@ -71,6 +98,8 @@ function checkValidMove(posX, posZ, chess){
           if(_Chessed(posX, posZ, chess))
           return true;}
       } else {
+        if ( ( chess.position.z == posZ + 1 && chess.position.x == posX + 1 ) || ( chess.position.z == posZ + 1 && chess.position.x == posX - 1 ))
+          return true;
         if ( (chess.position.z == posZ + 1)  && chess.position.x == posX ) 
         if(_Chessed(posX, posZ, chess))
           return true;
@@ -87,6 +116,8 @@ function checkValidMove(posX, posZ, chess){
           if(_Chessed(posX, posZ, chess))
             return true;
       } else {
+        if ( ( chess.position.z == posZ - 1 && chess.position.x == posX - 1 ) || ( chess.position.z == posZ - 1 && chess.position.x == posX + 1 ))
+          return true;
         if ( (chess.position.z == posZ - 1) && chess.position.x == posX)
         if(_Chessed(posX, posZ, chess))
             return true;
@@ -94,6 +125,7 @@ function checkValidMove(posX, posZ, chess){
       break;   
     case "Black-Rock":
     case "White-Rock":
+<<<<<<< HEAD
       {
           if (_checkPositionChess_col(chess, posZ)){
               if(_checkPositionChess_row(chess, posX)){
@@ -103,6 +135,10 @@ function checkValidMove(posX, posZ, chess){
                   }
               }
           }
+=======
+      if (chess.position.x == posX || chess.position.z == posZ) {
+        return true;
+>>>>>>> 00ad26b05b0e5878216e08900fcb5e57c7011f80
       }
 
       break;
