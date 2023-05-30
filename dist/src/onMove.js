@@ -42,11 +42,6 @@ export function onClickPiece(event) {
     if ( intersects.length > 0 && intersects[0].object.userData.squareNumber ) {
       const targetSquare = intersects[0].object.userData.squareNumber;
       const selectedObject = scene.children.find((child) => child.userData.currentSquare === selectedMesh);
-<<<<<<< HEAD
-      // console.log(selectedObject);
-=======
-      
->>>>>>> 00ad26b05b0e5878216e08900fcb5e57c7011f80
       if (!selectedObject || !targetSquare) return;
       
       const targetPosition = positionForSquare(targetSquare);
@@ -89,21 +84,24 @@ export function onClickPiece(event) {
 function checkValidMove(posX, posZ, chess){
   switch (chess.userData.name) {
     case "Black-Pawn":
-      
-        if (_checkPositionChess_col(chess, posZ)){
-            if(_checkPositionChess_row(chess, posX)){
-      if(chess.position.z  == 7) {
-        if ((chess.position.z == posZ + 1 || chess.position.z == posZ + 2)
-        && chess.position.x == posX) {
-          if(_Chessed(posX, posZ, chess))
-          return true;}
-      } else {
-        if ( ( chess.position.z == posZ + 1 && chess.position.x == posX + 1 ) || ( chess.position.z == posZ + 1 && chess.position.x == posX - 1 ))
-          return true;
-        if ( (chess.position.z == posZ + 1)  && chess.position.x == posX ) 
-        if(_Chessed(posX, posZ, chess))
-          return true;
-      }   }}
+      if (_checkPositionChess_col(chess, posZ)){
+        if(_checkPositionChess_row(chess, posX)){
+          if(chess.position.z  == 7) {
+            if ((chess.position.z == posZ + 1 || chess.position.z == posZ + 2)
+            && chess.position.x == posX) {
+              if(_Chessed(posX, posZ, chess))
+                return true;
+            }
+        } else {
+          if ( ( chess.position.z == posZ + 1 && chess.position.x == posX + 1 ) || ( chess.position.z == posZ + 1 && chess.position.x == posX - 1 ))
+            if(_Chessed(posX, posZ, chess))
+              return true;
+          if ( (chess.position.z == posZ + 1)  && chess.position.x == posX ) 
+            if(_Chessed(posX, posZ, chess))
+              return true;
+        }   
+      }
+    }
       break;
     
     case "White-Pawn":
@@ -125,8 +123,6 @@ function checkValidMove(posX, posZ, chess){
       break;   
     case "Black-Rock":
     case "White-Rock":
-<<<<<<< HEAD
-      {
           if (_checkPositionChess_col(chess, posZ)){
               if(_checkPositionChess_row(chess, posX)){
                   if (chess.position.x == posX || chess.position.z == posZ) {
@@ -134,13 +130,7 @@ function checkValidMove(posX, posZ, chess){
                     return true;
                   }
               }
-          }
-=======
-      if (chess.position.x == posX || chess.position.z == posZ) {
-        return true;
->>>>>>> 00ad26b05b0e5878216e08900fcb5e57c7011f80
-      }
-
+            }
       break;
 
     case "Black-Bishop":
@@ -166,54 +156,54 @@ function checkValidMove(posX, posZ, chess){
 
     case "Black-Knight":
     case "White-Knight":
-      {
       var dx = posX - chess.position.x;
       var dz = posZ - chess.position.z;
       var absDx = Math.abs(dx);
       var absDz = Math.abs(dz);
-      if ((absDx === 1 && absDz === 2) || (absDx === 2 && absDz === 1)) {
+      if ((absDx == 1 && absDz == 2) || (absDx == 2 && absDz == 1)) {
         if(_Chessed(posX, posZ, chess))
-        return true;
-      }}
+          return true;
+      }
     break;
       
     case "Black-Queen":
     case "White-Queen":
       if(chess.position.x == posX){
         if(_checkPositionChess_col(chess, posZ)){
-      var dx = posX - chess.position.x;
-      var dz = posZ - chess.position.z;
-      var absDx = Math.abs(dx);
-      var absDz = Math.abs(dz);
-      if (absDx === absDz || absDx === 0 || absDz === 0) 
-        if(_Chessed(posX, posZ, chess))
-        return true;
-        }
-        else 
-        if(chess.position.z == posZ){
+          var dx = posX - chess.position.x;
+          var dz = posZ - chess.position.z;
+          var absDx = Math.abs(dx);
+          var absDz = Math.abs(dz);
+          if (absDx === absDz || absDx === 0 || absDz === 0) 
+            if(_Chessed(posX, posZ, chess))
+            return true;
+        } 
+      } else
+          if(chess.position.z == posZ){
             if(_checkPositionChess_row(chess, posX)){
               var dx = posX - chess.position.x;
-                                var dz = posZ - chess.position.z;
-                                var absDx = Math.abs(dx);
-                                var absDz = Math.abs(dz);
-                                if (absDx === absDz || absDx === 0 || absDz === 0) {
-                                  if(_Chessed(posX, posZ, chess))  
-                                  return true;
-                                }
-                              }}
-                              else {
-                                if(_checkPositionChess_diag(chess, posZ, posX)){
-                                    var dx = posX - chess.position.x;
-                                    var dz = posZ - chess.position.z;
-                                    var absDx = Math.abs(dx);
-                                    var absDz = Math.abs(dz);
-                                    if (absDx === absDz || absDx === 0 || absDz === 0) {
-                                      if(_Chessed(posX, posZ, chess))  
-                                      return true;
-                                    }
-                                }}
-      }
-            
+              var dz = posZ - chess.position.z;
+              var absDx = Math.abs(dx);
+              var absDz = Math.abs(dz);
+              if (absDx === absDz || absDx === 0 || absDz === 0) {
+                if(_Chessed(posX, posZ, chess))  
+                return true;
+              }
+            }
+          } else {  
+              if(_checkPositionChess_diag(chess, posZ, posX)){
+                var dx = posX - chess.position.x;
+                var dz = posZ - chess.position.z;
+                var absDx = Math.abs(dx);
+                var absDz = Math.abs(dz);
+                if (absDx === absDz || absDx === 0 || absDz === 0) {
+                  if(_Chessed(posX, posZ, chess))  
+                  return true;
+                }
+              }
+            }
+
+          
       break;
     
     case "Black-King":
@@ -284,14 +274,16 @@ function _checkPositionChess_row(chess, pos_x) {
           var ob_z = object.position.z;
           
           if(ob_z == height ) {
-            console.log(width + " "+ pos_x)
-            console.log(ob_x);
             if (width < pos_x){
               if(ob_x > width && ob_x < pos_x) {
+                console.log(width + " "+ pos_x)
+                console.log(ob_x);
                 check_row = 1;
               }
             } else
-                if (ob_z > pos_x && ob_z < width){
+                if (ob_x < width && ob_x > pos_x){
+                  console.log(width + " "+ pos_x)
+                  console.log(ob_x);
                   check_row = 1;
                 }
           }
