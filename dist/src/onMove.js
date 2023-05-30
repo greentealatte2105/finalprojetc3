@@ -42,11 +42,7 @@ export function onClickPiece(event) {
     if ( intersects.length > 0 && intersects[0].object.userData.squareNumber ) {
       const targetSquare = intersects[0].object.userData.squareNumber;
       const selectedObject = scene.children.find((child) => child.userData.currentSquare === selectedMesh);
-<<<<<<< HEAD
-      // console.log(selectedObject);
-=======
       
->>>>>>> 00ad26b05b0e5878216e08900fcb5e57c7011f80
       if (!selectedObject || !targetSquare) return;
       
       const targetPosition = positionForSquare(targetSquare);
@@ -125,20 +121,8 @@ function checkValidMove(posX, posZ, chess){
       break;   
     case "Black-Rock":
     case "White-Rock":
-<<<<<<< HEAD
-      {
-          if (_checkPositionChess_col(chess, posZ)){
-              if(_checkPositionChess_row(chess, posX)){
-                  if (chess.position.x == posX || chess.position.z == posZ) {
-                    if(_Chessed(posX, posZ, chess))
-                    return true;
-                  }
-              }
-          }
-=======
       if (chess.position.x == posX || chess.position.z == posZ) {
         return true;
->>>>>>> 00ad26b05b0e5878216e08900fcb5e57c7011f80
       }
 
       break;
