@@ -1,16 +1,15 @@
-import * as THREE from "../node_modules/three/build/three.module.js";
-import { OrbitControls } from '../node_modules/three/examples/jsm/controls/OrbitControls.js';
-import { RGBELoader } from "../node_modules/three/examples/jsm/loaders/RGBELoader.js";
+import * as THREE from "https://unpkg.com/three@0.127.0/build/three.module.js";
+import { OrbitControls } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/controls/OrbitControls.js';
+import { RGBELoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/RGBELoader.js";
 export let scene, camera, renderer, controls;
 
+let bg1 = new URL('../models/background.hdr', import.meta.url);
+let bg2 = new URL('../models/grass.hdr', import.meta.url);
+let bg3 = new URL('../models/sky.hdr', import.meta.url);
+let bg4 = new URL('../models/arena.hdr', import.meta.url);
 
 export function bgChange(){
-  let bg1 = new URL('../models/background.hdr', import.meta.url);
-  let bg2 = new URL('../models/grass.hdr', import.meta.url);
-  let bg3 = new URL('../models/sky.hdr', import.meta.url);
-  let bg4 = new URL('../models/arena.hdr', import.meta.url);
-
-
+  
   const bgList = [bg1, bg2, bg3, bg4];
 
   var randomNumber = Math.floor(Math.random() * bgList.length);
@@ -44,8 +43,9 @@ export function initScene() {
   renderer.outputEncoding = THREE.sRGBEncoding;
   document.body.appendChild(renderer.domElement);
 
-  camera.position.y = 1;
-  camera.position.z = 3;
+  camera.position.y = 6;
+  camera.position.x = -3;
+  camera.position.z = 4.3;
 
   controls = new OrbitControls(camera, renderer.domElement);
   controls.target.set(4.5, 0, 4.5);
